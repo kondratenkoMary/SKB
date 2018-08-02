@@ -10,7 +10,7 @@ ComponentModel::ComponentModel (string name,Component* component)
     setName(name);
     setAngle(0.0);
     setFlag(0);
-     __component = component;
+    __component = component;
 }
 
 Component* ComponentModel:: Owner() // возвращает модель
@@ -37,29 +37,111 @@ sf::Vector2f ComponentModel::Coord()
 }
 sf::Vector2f ComponentModel::Size()
 {
-   return size;
+    return size;
 }
-void ComponentModel::setName(string name2){
-   Name=name2;
+void ComponentModel::setName(string name2)
+{
+    Name=name2;
 }
-string ComponentModel::name(){
-return Name;
+string ComponentModel::name()
+{
+    return Name;
 }
-void ComponentModel::setAngle(double angle2){
-Angle=angle2;
+void ComponentModel::setAngle(double angle2)
+{
+    Angle=angle2;
 }
-double ComponentModel::angle(){
-return Angle;
+double ComponentModel::angle()
+{
+    return Angle;
 }
-void ComponentModel::setFlag(sf::Uint16 flag2){
-Flag=flag2;
+void ComponentModel::setFlag(sf::Uint16 flag2)
+{
+    Flag=flag2;
 }
-sf::Uint16 ComponentModel::flag(){
-return Flag;
+sf::Uint16 ComponentModel::flag()
+{
+    return Flag;
 }
-void ComponentModel::setRenderStates(sf::RenderStates renderstates){
+void ComponentModel::setRenderStates(sf::RenderStates renderstates)
+{
     __renderstates = renderstates;
 }
-sf::RenderStates ComponentModel::renderstates(){
-return __renderstates;
+
+sf::RenderStates ComponentModel::renderstates()
+{
+    return __renderstates;
+}
+
+void ComponentModel:: setChildren (int index, pComponent child)
+{
+    children[index]=child;
+}
+
+pComponent ComponentModel::Children (int index, pComponent child)
+{
+    return children[index];
+}
+void ComponentModel::Add(pComponent child)    // Добавить потомка
+{
+    children.push_back(child);
+}
+unsigned int ComponentModel::Count(int count)// количиество потомков
+{
+    count=children.size();
+}
+pComponent ComponentModel::Find(string name) // ищет компонент по имени
+{
+    for( int i=0; i<children.size(); i++)
+    {
+        if (children[i]->Model()->name()==name)
+        {
+            return children[i];
+        }
+    }
+}
+
+bool ComponentModel::Find (pComponent component)
+{
+    for (int i=0; i<children.size(); i++)
+    {
+        if (children[i]==component)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+}
+void ComponentModel::Exclude(pComponent component)
+{
+    for (int i=0; i<children.size(); i++)
+    {
+        if (children[i]==component)
+        {
+            children.erase(children.begin()+i);
+        }
+    }
+}
+void ComponentModel:: Delete(pComponent component)
+{
+    for (int i=0; i<children.size(); i++)
+    {
+        if (children[i]==component)
+        {
+            delete children[i];
+            Exclude (children[i]);
+        }
+    }
+}
+void ComponentModel::Delete(string  name)
+{
+    for( int i=0; i<children.size(); i++)
+    {
+        if (children[i]->Model()->name()==name)
+        {
+            delete children[i];
+            Exclude (children[i]);
+        }
+    }
 }

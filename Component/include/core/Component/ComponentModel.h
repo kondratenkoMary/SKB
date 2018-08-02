@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "core/Component/Component.h"
@@ -13,6 +14,8 @@ private:
     sf::Uint16 Flag;
     sf::RenderStates __renderstates;
     Component* __component;
+    pComponent __parent;
+    vector<pComponent>children;
 public:
     ComponentModel (string name, Component* component);
     void setlocalCoord (int X_coord, int Y_coord);
@@ -29,5 +32,13 @@ public:
     sf::RenderStates renderstates();
     Component* Owner(); // возвращает модель
     void SetOwner(Component* component); // установить модель
-
+    void setChildren (int index, pComponent child);
+    pComponent Children (int index, pComponent child);
+void Add(pComponent child);
+unsigned int Count(int count);
+pComponent Find(string name);
+bool Find (pComponent component);
+void Exclude(pComponent component);
+void Delete(pComponent component);
+void Delete(string  name);
 };

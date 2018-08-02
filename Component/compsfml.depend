@@ -875,7 +875,8 @@
 	"core/Component/ComponentController.h"
 	"core/Component/Component.h"
 
-1532417420 d:\gitkraken\skb\component\include\core\component\componentmodel.h
+1533179370 d:\gitkraken\skb\component\include\core\component\componentmodel.h
+	<vector>
 	<iostream>
 	<SFML/Graphics.hpp>
 	"core/Component/Component.h"
@@ -909,13 +910,13 @@
 	"core/Component/ComponentView.h"
 	"core/Component/ComponentController.h"
 
-1532416187 source:d:\gitkraken\skb\component\src\core\component\componentview.cpp
+1532418062 source:d:\gitkraken\skb\component\src\core\component\componentview.cpp
 	<iostream>
 	<SFML/Graphics.hpp>
 	"core/Component/ComponentModel.h"
 	"core/Component/ComponentView.h"
 
-1532416197 source:d:\gitkraken\skb\component\src\core\component\copmonentmodel.cpp
+1533099872 source:d:\gitkraken\skb\component\src\core\component\copmonentmodel.cpp
 	<iostream>
 	"core/Component/ComponentModel.h"
 	<SFML/Graphics.hpp>
@@ -928,5 +929,5 @@
 	"core/Component/ComponentController.h"
 	"core/Component/Component.h"
 
-1532416841 d:\gitkraken\skb\component\include\core\core.h
+1533098650 d:\gitkraken\skb\component\include\core\core.h
 
