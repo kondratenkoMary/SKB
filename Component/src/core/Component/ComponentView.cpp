@@ -24,14 +24,17 @@ void ComponentView::Render(sf::RenderTarget& target)
     sf::Vector2f coord;
     sf::Vector2f size;
     ComponentModel* model = Owner()->Model();
-    coord = Owner()->Model()->Coord();
-    coord = model->Coord();
+    coord = Owner()->Model()->LocalCoord();
+   // coord = model->Coord();
  //  coord=__model->Coord();
      size=model->Size();
     //size=__model->Size();
 
     sf::RectangleShape rectangle(size);
-    rectangle.setFillColor(sf::Color::Green);///
+    if ( Owner()->Model()->GetFlag(FLAG_FOCUS)>0)
+    {
+        rectangle.setFillColor(sf::Color::Green);///
+    }else rectangle.setFillColor(sf::Color::Red);
     rectangle.setPosition(coord);
     target.draw(rectangle);
 }

@@ -12,7 +12,6 @@ ComponentModel::ComponentModel (string name,Component* component)
     setFlag(0);
     __component = component;
 }
-
 Component* ComponentModel:: Owner() // возвращает модель
 {
     return __component;
@@ -31,7 +30,7 @@ void ComponentModel::setSize (int A_size, int B_size)
     size.x=A_size;
     size.y=B_size;
 }
-sf::Vector2f ComponentModel::Coord()
+sf::Vector2f ComponentModel::LocalCoord()
 {
     return localCoord;
 }
@@ -55,9 +54,13 @@ double ComponentModel::angle()
 {
     return Angle;
 }
-void ComponentModel::setFlag(sf::Uint16 flag2)
+void ComponentModel::setFlag(sf::Uint16 flag)
 {
-    Flag=flag2;
+    Flag=flag;
+}
+sf::Uint16 ComponentModel:: GetFlag(sf::Uint16 flag)
+{
+    return Flag&&flag;//все  нули
 }
 sf::Uint16 ComponentModel::flag()
 {
@@ -144,4 +147,15 @@ void ComponentModel::Delete(string  name)
             Exclude (children[i]);
         }
     }
+}
+void ComponentModel::SetFlag(const sf::Uint16 flag)
+{
+  Flag = Flag | flag;
+}
+
+void ComponentModel::ResetFlag(const sf::Uint16 flag)
+{
+    sf::Uint16 not_flag;
+	not_flag = ! flag;
+	Flag &= not_flag;
 }
