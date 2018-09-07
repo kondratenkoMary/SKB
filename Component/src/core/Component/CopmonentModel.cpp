@@ -11,6 +11,7 @@ ComponentModel::ComponentModel (string name,Component* component)
     setAngle(0.0);
     setFlag(0);
     __component = component;
+    setFlag(FLAG_VISIBLE);
 }
 Component* ComponentModel:: Owner() // возвращает модель
 {
@@ -60,7 +61,7 @@ void ComponentModel::setFlag(sf::Uint16 flag)
 }
 sf::Uint16 ComponentModel:: GetFlag(sf::Uint16 flag)
 {
-    return Flag&&flag;//все  нули
+    return Flag&flag;//все  нули
 }
 sf::Uint16 ComponentModel::flag()
 {
@@ -88,6 +89,7 @@ pComponent ComponentModel::Children (int index, pComponent child)
 void ComponentModel::Add(pComponent child)    // Добавить потомка
 {
     children.push_back(child);
+
 }
 unsigned int ComponentModel::Count(int count)// количиество потомков
 {
@@ -150,12 +152,32 @@ void ComponentModel::Delete(string  name)
 }
 void ComponentModel::SetFlag(const sf::Uint16 flag)
 {
-  Flag = Flag | flag;
+    Flag = Flag | flag;
 }
 
 void ComponentModel::ResetFlag(const sf::Uint16 flag)
 {
     sf::Uint16 not_flag;
-	not_flag = ! flag;
-	Flag &= not_flag;
+    not_flag = ~flag;
+    Flag &= not_flag;
 }
+Component* ComponentModel:: Parent()
+{
+    return __parent;
+}
+void ComponentModel:: SetParent(pComponent parent)
+{
+    __parent = parent;
+}
+
+sf::Vector2f ComponentModel:: AbsoluteCoord()
+ {
+if( Parent()==nullptr)
+{
+    return localCoord;
+}else
+{
+    return Parent()->Model()->AbsoluteCoord()+localCoord;
+}
+
+ }

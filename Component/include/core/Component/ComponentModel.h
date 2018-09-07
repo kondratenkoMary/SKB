@@ -6,6 +6,7 @@
 using namespace std;
 
 const int FLAG_FOCUS=1;
+const int FLAG_VISIBLE=2;
 class ComponentModel
 {
     friend ComponentController;
@@ -17,7 +18,7 @@ private:
     sf::Uint16 Flag;
     sf::RenderStates __renderstates;
     Component* __component;
-    pComponent __parent;
+    pComponent __parent;//
     vector<pComponent>children;
 public:
     ComponentModel (string name, Component* component);
@@ -38,13 +39,16 @@ public:
     void SetOwner(Component* component); // установить модель
     void setChildren (int index, pComponent child);
     pComponent Children (int index, pComponent child);
-void Add(pComponent child);
-unsigned int Count(int count);
-pComponent Find(string name);
-bool Find (pComponent component);
-void Exclude(pComponent component);
-void Delete(pComponent component);
-void Delete(string  name);
-void SetFlag(const sf::Uint16 flag);
-void ResetFlag (const sf::Uint16 flag);
+    void Add(pComponent child);
+    unsigned int Count(int count);
+    pComponent Find(string name);
+    bool Find (pComponent component);
+    void Exclude(pComponent component);
+    void Delete(pComponent component);
+    void Delete(string  name);
+    void SetFlag(const sf::Uint16 flag);
+    void ResetFlag (const sf::Uint16 flag);
+    sf::Vector2f AbsoluteCoord();
+    Component*Parent();
+    void SetParent(Component* parent);
 };
